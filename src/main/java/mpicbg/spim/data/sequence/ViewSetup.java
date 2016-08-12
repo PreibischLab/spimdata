@@ -87,6 +87,34 @@ public class ViewSetup extends BasicViewSetup implements Comparable< ViewSetup >
 		setChannel( channel );
 		setAngle( angle );
 		setIllumination( illumination );
+		setTile( tile );
+	}
+
+	/**
+	 * TODO
+	 *
+	 * @param id
+	 * @param name
+	 * @param size
+	 * @param voxelSize
+	 * @param channel
+	 * @param angle
+	 * @param illumination
+	 */
+	public ViewSetup(
+			final int id,
+			final String name,
+			final Dimensions size,
+			final VoxelDimensions voxelSize,
+			final Channel channel,
+			final Angle angle,
+			final Illumination illumination )
+	{
+		super( id, name, size, voxelSize );
+		setChannel( channel );
+		setAngle( angle );
+		setIllumination( illumination );
+		setTile( new Tile( 0 ) );
 	}
 
 	/**
@@ -294,6 +322,19 @@ public class ViewSetup extends BasicViewSetup implements Comparable< ViewSetup >
 		setChannel( ( Channel ) attributes.get( channelAttributeKey ) );
 		setAngle( ( Angle ) attributes.get( angleAttributeKey ) );
 		setIllumination( ( Illumination ) attributes.get( illuminationAttributeKey ) );
+		
+		// if any attribute is not present, set it to a default
+		if ( getTile() == null )
+			setTile( new Tile( 0 ) );
+
+		if ( getChannel() == null )
+			setChannel( new Channel( 0 ) );
+
+		if ( getAngle() == null )
+			setAngle( new Angle( 0 ) );
+
+		if ( getIllumination() == null )
+			setIllumination( new Illumination( 0 ) );
 	}
 
 	ViewSetup()
